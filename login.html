@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css"     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        #login_form{
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    h3{
+        margin-left: 20px;
+        color: #5D5D5D;
+    }
+    </style>
+
+<script type = "text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<script>
+    /*window.onload = function(){
+        var getRandomNumberId = document.getElementById("randomNumber");
+        var getLoginFormId = document.getElementById("login_form");
+        var getLoginButtonId = document.getElementById("login_ok");
+        var randomNumber = Math.floor((Math.random() * (10000000000-0+1))+0);
+
+        getRandomNumberId.innerHTML = randomNumber;
+
+        getLoginButtonId.onclick = function()
+        {
+            LoginEvent();
+        }
+
+        //로그인 버튼을 눌렀을 때 비교하기
+        var LoginEvent = function(){
+            var getRandomNumberInputId = document.getElementById("randomNumberInput");
+            var getUserNumberValue = getRandomNumberInputId.value;
+
+            if ( randomNumber == getUserNumberValue ){
+                getLoginFormId.submit();
+            }
+        //입력한 건 리셋 -> 다시 입력할 수 있도록 함
+            else{
+                alert("입력한 숫자가 다릅니다.");
+                getLoginFormId.reset();
+            }
+        }
+    } */
+
+    $(document).ready(function(){
+
+        var getRandomNumberId = document.getElementById('randomNumber');
+        //var getLoginFormId = $('#login_form').val();
+        //var getLoginButtonId = $('#login_ok').val();
+        var randomNumber = Math.floor((Math.random() * (10000000000-0+1))+0);
+
+        getRandomNumberId.innerHTML = randomNumber;
+
+        $('#login_ok').click(function(){
+            var  getUserNumberValue = $('#randomNumberInput').val();
+
+            if(randomNumber == getUserNumberValue){
+                $('#login_form').submit();
+            }
+            else{
+                alert("입력한 숫자가 다릅니다.");
+                $('#login_form').each(function(){
+                    this.reset();
+                })
+            }    
+        }); 
+            
+    });
+
+</script>
+</head>
+<body>
+    <h3>로그인 페이지</h3>
+
+        <form class="form-inline" id="login_form" method="POST" action="login_ok.php">
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputEmail3">ID</label>
+              <input type="edit" class="form-control" id="login_id" placeholder="ID">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputPassword3">Password</label>
+              <input type="password" class="form-control" id="login_pass" placeholder="Password">
+            </div>
+            <br></br>
+            <div id="randomNumber">    
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="exampleInputPassword3">Security Code</label>
+                <input type="edit" class="form-control" id="randomNumberInput" placeholder="보이는 대로 입력하세요.">
+            </div>
+
+            <button type="button" class="btn btn-default" id="login_ok">Login</button>
+
+        </form>   
+
+</body>
+</html>
