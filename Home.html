@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css"     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <title>Devleoper</title>
+
+    <style>
+    #head1,nav{
+        text-align: center;
+    }
+
+    #img1{
+        padding: 10px;
+    }
+
+
+    </style>
+
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=jWzrLXa_KOBKORs6T2EJ&submodules=geocoder"></script>
+    <script src = "http://code.jquery.com/jquery-3.1.1.js"></script>
+    
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+            </button>
+            <a class="navbar-brand" href="Home.html">Developer</a>                   
+            
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="Home.html">About <span class="sr-only">(current)</span></a></li>
+              <li><a href="Portfolio.html">Portfolio</a></li>
+              <li><a href="Notice.html">Notice</a></li>
+              <li><a href="MJoin.html">Join</a></li>
+            </ul>  
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li><a href="https://blog.naver.com/jungdahee010">Blog</a></li>          
+                    <li><a href="https://www.instagram.com/dia_0108/">Instagram</a></li>  
+            </ul>
+
+            <ul>
+            <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+
+    <h1 id="head1">Developer <small> Jung dahee</small></h1>
+    
+    <div class="center-block" id="intro" align="center">
+        <img alt="home" src="https://127.0.0.1\html\images\KakaoTalk_20180403_205451283.jpg" width="300" height="300" id="img1">
+        <table id="tab1">
+            <tr>
+                <td>이름</td>
+                <td>정다희</td>
+            </tr>
+            <tr>
+                <td>생년월일</td>
+                <td>1996.01.08</td>
+            </tr>
+            <tr>
+                <td>학력</td>
+                <td>성신여자대학교</td>
+            </tr>
+            <tr>
+                <td>전공</td>
+                <td>정보시스템/컴퓨터소프트웨어</td>
+            </tr>
+        </table>
+    </div>      
+
+          <div id="map" style="width:500px;height:400px;margin:auto;margin-top:30px;"></div>
+          <script>
+            var map = new naver.maps.Map('map');
+            var myaddress = '화합로1325번길 22-33';// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+            naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+                if (status !== naver.maps.Service.Status.OK) {
+                    return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+                }
+                var result = response.result;
+                // 검색 결과 갯수: result.total
+                // 첫번째 결과 결과 주소: result.items[0].address
+                // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
+                var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+                map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+                // 마커 표시
+                var marker = new naver.maps.Marker({
+                  position: myaddr,
+                  map: map
+                });
+                // 마커 클릭 이벤트 처리
+                naver.maps.Event.addListener(marker, "click", function(e) {
+                  if (infowindow.getMap()) {
+                      infowindow.close();
+                  } else {
+                      infowindow.open(map, marker);
+                  }
+                });
+                // 마크 클릭시 인포윈도우 오픈
+                var infowindow = new naver.maps.InfoWindow({
+                    content: '<h4> [네이버 개발자센터]</h4><a href="https://developers.naver.com" target="_blank"><img src="https://developers.naver.com/inc/devcenter/images/nd_img.png"></a>'
+                });
+            });
+
+            </script>
+
+<nav align="center">
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="active"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+      
+
+<p class="navbar-text navbar-center" align="center">Made by <a href="#" class="navbar-link">Jung dahee</a></p>
+    
+</body>
+</html>
